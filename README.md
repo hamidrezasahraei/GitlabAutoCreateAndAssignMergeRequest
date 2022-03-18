@@ -1,7 +1,7 @@
 # Gitlab Auto-Create And Assign MergeRequests
 
 This Kotlin Script can be used in GitLab CI to create merge requests automatically and assign them to a developer for review based on a strategy(Currently it is using Queue).
-It is based on the script and idea of this [repo](https://github.com/tmaier/gitlab-auto-merge-request).
+For creating the merge requests it use the basic ideas from this [repo](https://github.com/tmaier/gitlab-auto-merge-request).
 ## Instructions
 
 ### 1) `CI_ACCESS_TOKEN`
