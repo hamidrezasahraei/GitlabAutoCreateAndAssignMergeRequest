@@ -7,21 +7,15 @@
 @file:MavenRepository("jitpack","https://jitpack.io" )
 
 import java.net.*
-import java.io.*
 import com.github.kittinunf.fuel.*
 import com.github.kittinunf.fuel.core.*
 import com.github.kittinunf.fuel.core.extensions.jsonBody
-import com.github.kittinunf.fuel.core.interceptors.cUrlLoggingRequestInterceptor
 import com.github.kittinunf.fuel.gson.responseObject
-import com.github.kittinunf.fuel.json.responseJson
 import com.github.kittinunf.result.Result
 import com.google.gson.Gson
 import kotlin.system.exitProcess
 
 val reviewerIDs = mutableListOf<String>()
-File("./merge-request-assign-queue.txt").forEachLine {
-    reviewerIDs.add(it.split('-').first())
-}
 
 // Create project URL for api calls from pre defined variables
 val ciCompleteProjectUrl = System.getenv("CI_PROJECT_URL")
@@ -44,6 +38,11 @@ var currentReviewerId = System.getenv("CURRENT_REVIEWER_USER_ID")
 
 if (currentReviewerId.isEmpty()) {
     println("CURRENT_REVIEWER_USER_ID variable is not set.")
+    exitProcess(1)
+}
+
+if (reviewerIDs.isEmpty()) {
+    println("reviewerIDs is empty, You should add some reviewers to the list.")
     exitProcess(1)
 }
 
